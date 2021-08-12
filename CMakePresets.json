@@ -1,0 +1,78 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "vcpkg",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": {
+                    "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                    "type": "FILEPATH"
+                }
+            }
+        },
+        {
+            "name": "windows-base",
+            "description": "Base configuration to target Windows with the Visual Studio development environment, using Ninja generator.",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/builds/${presetName}",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+            },
+            "vendor": { "microsoft.com/VisualStudioSettings/CMake/1.0": { "hostOS": [ "Windows" ] } }
+        },
+        {
+            "name": "msvc_x64_debug",
+            "displayName": "MSVC x64 Debug",
+            "inherits": [
+                "windows-base",
+                "vcpkg"
+            ],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+        ,
+        {
+            "name": "msvc_x64_release",
+            "displayName": "MSVC x64 Release",
+            "inherits": [
+                "windows-base",
+                "vcpkg"
+            ],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug_x64",
+            "description": "MSVC x64 Build",
+            "displayName": "Debug X64",
+            "configurePreset": "msvc_x64_debug"
+        },
+        {
+            "name": "release_x64",
+            "description": "MSVC x64 Build",
+            "displayName": "Release X64",
+            "configurePreset": "msvc_x64_release"
+        }
+    ]
+}
