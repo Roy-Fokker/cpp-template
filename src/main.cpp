@@ -12,5 +12,3 @@ int main()
         fmt::print("{}\n", i);
     }
 }
-
-// Github ssh key test
