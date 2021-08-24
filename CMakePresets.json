@@ -8,6 +8,7 @@
     "configurePresets": [
         {
             "name": "vcpkg",
+            "displayName": "VCPKG configuration",
             "hidden": true,
             "cacheVariables": {
                 "CMAKE_TOOLCHAIN_FILE": {
@@ -17,11 +18,31 @@
             }
         },
         {
-            "name": "windows-base",
-            "description": "Base configuration to target Windows with the Visual Studio development environment, using Ninja generator.",
+            "name": "ninja",
+            "displayName": "Ninja generator configuration",
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/builds/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+            }
+        },
+        {
+            "name": "msvc-compiler",
+            "displayName": "MS Visual C++ compiler/linker",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_C_COMPILER": "cl.exe"
+            }
+        },
+        {
+            "name": "msvc-x64",
+            "displayName": "MS Visual C++ x64 configuration",
+            "hidden": true,
+            "inherits": [
+                "msvc-compiler"
+            ],
             "architecture": {
                 "value": "x64",
                 "strategy": "external"
@@ -31,32 +52,37 @@
                 "strategy": "external"
             },
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
-
-            },
-            "vendor": { "microsoft.com/VisualStudioSettings/CMake/1.0": { "hostOS": [ "Windows" ] } }
+                "CMAKE_CXX_FLAGS": "/W3 /permissive- /Zc:__cplusplus /utf-8 /EHsc"
+            }
         },
         {
-            "name": "msvc_x64_debug",
-            "displayName": "MSVC x64 Debug",
+            "name": "win-x64",
+            "displayName": "Windows x64 configuration",
+            "hidden": true,
             "inherits": [
-                "windows-base",
-                "vcpkg"
+                "vcpkg",
+                "ninja",
+                "msvc-x64"
+            ]
+        },
+        {
+            "name": "win-x64-debug",
+            "displayName": "Windows x64 debug",
+            "inherits": [
+                "win-x64"
             ],
+
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
-        }
-        ,
+        },
         {
-            "name": "msvc_x64_release",
-            "displayName": "MSVC x64 Release",
+            "name": "win-x64-release",
+            "displayName": "Windows x64 release",
             "inherits": [
-                "windows-base",
-                "vcpkg"
+                "win-x64"
             ],
+
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
@@ -64,16 +90,14 @@
     ],
     "buildPresets": [
         {
-            "name": "debug_x64",
-            "description": "MSVC x64 Build",
-            "displayName": "Debug X64",
-            "configurePreset": "msvc_x64_debug"
+            "name": "Win-x64-Debug",
+            "displayName": "Windows x64 Debug",
+            "configurePreset": "win-x64-debug"
         },
         {
-            "name": "release_x64",
-            "description": "MSVC x64 Build",
-            "displayName": "Release X64",
-            "configurePreset": "msvc_x64_release"
+            "name": "Win-x64-Release",
+            "displayName": "Windows x64 Release",
+            "configurePreset": "win-x64-release"
         }
     ]
 }
