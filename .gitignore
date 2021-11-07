@@ -1,3 +1,13 @@
-/.vscode
-/builds
-/out
+# ignore CMake Build directory
+\builds
+
+# ignore vscode specific directory
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/

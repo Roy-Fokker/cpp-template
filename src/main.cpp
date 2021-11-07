@@ -1,14 +1,14 @@
 #include <fmt/core.h>
-#include <cppitertools/range.hpp>
-#include <iostream>
-#include <string>
+#include <scn/scn.h>
 
-int main()
+auto main() -> int
 {
-    fmt::print("C++ Template using CMake Presets\n");
+    fmt::print("Initiative\n");
 
-    for (auto &&i : iter::range(10))
-    {
-        fmt::print("{}\n", i);
-    }
+    auto i = 0;
+    scn::prompt("Enter a number: ", "{}", i);
+
+    fmt::print("number was {}\n", i);
+
+    return 0;
 }

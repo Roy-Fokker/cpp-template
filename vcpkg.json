@@ -1,8 +1,8 @@
 {
-    "name": "cpp-template",
-    "version-string": "0.0.1",
+    "name": "initiative",
+    "version-string": "0.1",
     "dependencies": [
-        "fmt",
-        "cppitertools"
+        "fmt", 
+        "scnlib"
     ]
 }
