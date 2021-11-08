@@ -26,3 +26,7 @@ target_link_libraries(cpp-template-exe
     PRIVATE
         fmt::fmt
         scn::scn)
+# Use Precompiled headers for std/os stuff
+target_precompile_headers(cpp-template-exe
+    PRIVATE
+        pch.h)
