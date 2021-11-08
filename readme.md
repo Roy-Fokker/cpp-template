@@ -11,3 +11,7 @@ Mush of it is magic.
   seems to append
 - [x] For VS Code, i guess it still needs a Debug Task setting? as hitting F7 or F5 when editing a file seems to build that one file?  
   Yup, need launch.json, not sure how this works in cross-platform way
+  
+## Non-windows building/cmake configuration 
+- it's broken, needs more work. 
+- tried with ubuntu wsl last, perhaps need to make a copy of the files over, rather than share singular source folder.
