@@ -16,7 +16,7 @@ target_compile_definitions(cpp-template-exe
 
 target_link_options(cpp-template-exe
     PRIVATE
-        /entry:mainCRTStartup)
+    $<$<CXX_COMPILER_ID:MSVC>:/entry:mainCRTStartup>)
 
 target_sources(cpp-template-exe
     PRIVATE
